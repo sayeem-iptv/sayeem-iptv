@@ -1,0 +1,17 @@
+#EXTM3U
+# SAYEEM IPTV - Global playlist starter
+# Add only streams you own or are authorized to redistribute.
+# Example entry:
+#EXTINF:-1 tvg-id="" tvg-name="Example Channel" tvg-logo="" group-title="Bangladesh | Live TV",Example Channel
+#https://your-authorized-stream.example/stream.m3u8
+
+# Suggested group-title categories:
+# Bangladesh | Live TV
+# India | Live TV
+# Pakistan | Live TV
+# USA | Live TV
+# UK | Live TV
+# International | Sports
+# International | News
+# International | Movies
+# International | Kids
