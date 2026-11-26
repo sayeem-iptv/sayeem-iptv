@@ -1,0 +1,27 @@
+#EXTM3U
+# SAYEEM IPTV — Official broadcaster watch-page starter
+# IMPORTANT:
+# These are official WATCH-PAGE URLs, not verified direct HLS/M3U8 media streams.
+# Some IPTV players cannot play web pages. Open these entries in a browser if playback fails.
+# Add direct stream URLs only when the broadcaster explicitly publishes them for public playback.
+
+#EXTINF:-1 tvg-name="BTV" group-title="Bangladesh | Live TV",BTV (Official Watch Page)
+https://btvlive.gov.bd/channel/BTV
+
+#EXTINF:-1 tvg-name="BTV News" group-title="Bangladesh | News",BTV News (Official Watch Page)
+https://btvlive.gov.bd/channel/BTV-News
+
+#EXTINF:-1 tvg-name="BTV Chattogram" group-title="Bangladesh | Live TV",BTV Chattogram (Official Watch Page)
+https://btvlive.gov.bd/channel/BTV-Chattogram
+
+#EXTINF:-1 tvg-name="Sangsad Television" group-title="Bangladesh | News",Sangsad Television (Official Watch Page)
+https://btvlive.gov.bd/channel/Sangsad-Television
+
+#EXTINF:-1 tvg-name="DD News" group-title="India | News",DD News (Official broadcaster channel)
+https://www.youtube.com/@DDNewsOfficial/live
+
+#EXTINF:-1 tvg-name="DD India" group-title="India | News",DD India (Official broadcaster channel)
+https://www.youtube.com/@DDIndia/live
+
+#EXTINF:-1 tvg-name="Al Jazeera English" group-title="International | News",Al Jazeera English (Official Live Page)
+https://www.aljazeera.com/video/live/
