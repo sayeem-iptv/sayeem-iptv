@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#080d18">
+<title>SAYEEM IPTV</title>
+<style>
+:root{color-scheme:dark;--bg:#080d18;--panel:#111a2b;--panel2:#17233a;--line:#263650;--text:#eef4ff;--muted:#9aabc4;--blue:#4f8cff;--green:#24bd82}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at top,#142544 0,#080d18 42%);font:15px system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--text)}
+header{padding:22px 18px 16px;max-width:1100px;margin:auto;display:flex;align-items:center;gap:12px}
+.logo{width:44px;height:44px;border-radius:14px;background:linear-gradient(135deg,#3e8bff,#20c997);display:grid;place-items:center;font-size:23px;font-weight:800;color:white}
+h1{font-size:21px;margin:0}header p{margin:3px 0 0;color:var(--muted);font-size:12px}
+main{max-width:1100px;margin:0 auto;padding:0 16px 30px;display:grid;grid-template-columns:minmax(0,1.65fr) minmax(260px,1fr);gap:16px}
+.card{background:linear-gradient(180deg,#121d30,#0e1727);border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:0 12px 34px #0004}
+.player{padding:14px}.screen{aspect-ratio:16/9;background:#02050a;border-radius:12px;display:grid;place-items:center;overflow:hidden;position:relative}
+video{width:100%;height:100%;background:#000;object-fit:contain}.placeholder{text-align:center;padding:20px;color:var(--muted)}.placeholder b{display:block;color:#fff;font-size:18px;margin-bottom:7px}
+.now{padding:14px 3px 2px}.now strong{font-size:17px}.now small{display:block;color:var(--muted);margin-top:4px}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+button,.file-label{border:1px solid #345078;background:#1a2a45;color:#f4f7ff;border-radius:10px;padding:10px 13px;font-weight:650;font-size:13px;cursor:pointer}
+button.primary{background:linear-gradient(135deg,#347df0,#2864cf);border:0}button:active,.file-label:active{transform:scale(.98)}
+input[type=file]{display:none}.side-head{padding:16px;border-bottom:1px solid var(--line)}.side-head h2{font-size:16px;margin:0 0 10px}
+.search{width:100%;padding:11px 12px;border-radius:10px;border:1px solid var(--line);background:#0b1423;color:white;font-size:14px;outline:none}
+.list{max-height:570px;overflow:auto;padding:8px}.channel{width:100%;display:flex;align-items:center;gap:11px;text-align:left;background:transparent;border:1px solid transparent;padding:12px;border-radius:12px;margin:2px 0}
+.channel:hover,.channel.active{background:#1a2a45;border-color:#35517a}.channel .dot{width:9px;height:9px;border-radius:50%;background:#4e8cff;flex:none}.channel .meta{min-width:0;flex:1}.channel b{display:block;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.channel small{display:block;color:var(--muted);margin-top:3px;font-size:11px}
+.note{margin:14px 16px 16px;padding:12px;border-radius:12px;background:#17253a;color:#c2d1e6;font-size:12px;line-height:1.55}
+.status{color:#8de0bc}.empty{color:var(--muted);padding:24px;text-align:center;font-size:13px}
+footer{max-width:1100px;margin:0 auto;padding:0 16px 24px;color:#8293ad;font-size:11px;line-height:1.6}
+@media(max-width:760px){main{grid-template-columns:1fr}.list{max-height:390px}header{padding-top:16px}}
+</style>
+</head>
+<body>
+<header><div class="logo">S</div><div><h1>SAYEEM IPTV</h1><p>নিজের অনুমোদিত লাইভ চ্যানেল প্লেলিস্ট</p></div></header>
+<main>
+<section class="card player">
+ <div class="screen" id="screen"><div class="placeholder" id="placeholder"><b>▶ SAYEEM IPTV</b>একটি চ্যানেল নির্বাচন করুন</div><video id="video" controls playsinline hidden></video></div>
+ <div class="now"><strong id="nowTitle">কোনো চ্যানেল চালু নেই</strong><small id="nowInfo">চ্যানেল চালু করতে ডান পাশের তালিকা থেকে নির্বাচন করুন।</small></div>
+ <div class="actions">
+  <label class="file-label" for="playlistFile">＋ M3U ফাইল যোগ করুন</label><input id="playlistFile" type="file" accept=".m3u,.m3u8,text/plain">
+  <button id="resetBtn">ডিফল্ট তালিকা</button>
+  <button id="openBtn" class="primary" disabled>অফিশিয়াল পেজ খুলুন ↗</button>
+ </div>
+</section>
+<aside class="card">
+ <div class="side-head"><h2>চ্যানেল তালিকা <span id="count" class="status"></span></h2><input class="search" id="search" placeholder="চ্যানেল খুঁজুন..."></div>
+ <div class="list" id="list"></div>
+ <div class="note">নোট: ডিফল্ট তালিকার ঠিকানাগুলো ব্রডকাস্টারের অফিসিয়াল দেখার পেজ; এগুলো সরাসরি M3U8 ভিডিও স্ট্রিম নয়। তাই ভিডিও বক্সে না চললে <b>অফিশিয়াল পেজ খুলুন</b> চাপুন। শুধু নিজের বা ব্যবহারের অনুমতি আছে এমন স্ট্রিম যোগ করুন।</div>
+</aside>
+</main>
+<footer>© SAYEEM IPTV · এই পেজ কোনো চ্যানেল হোস্ট করে না। প্লেব্যাক সংশ্লিষ্ট সম্প্রচারকের সাইট ও আপনার অনুমোদিত স্ট্রিমের ওপর নির্ভর করে।</footer>
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+<script>
+const defaults = [
+ {name:"BTV",group:"Bangladesh | Live TV",url:"https://btvlive.gov.bd/channel/BTV"},
+ {name:"BTV News",group:"Bangladesh | News",url:"https://btvlive.gov.bd/channel/BTV-News"},
+ {name:"BTV Chattogram",group:"Bangladesh | Live TV",url:"https://btvlive.gov.bd/channel/BTV-Chattogram"},
+ {name:"Sangsad Television",group:"Bangladesh | News",url:"https://btvlive.gov.bd/channel/Sangsad-Television"},
+ {name:"DD News",group:"India | News",url:"https://www.youtube.com/@DDNewsOfficial/live"},
+ {name:"DD India",group:"India | News",url:"https://www.youtube.com/@DDIndia/live"},
+ {name:"Al Jazeera English",group:"International | News",url:"https://www.aljazeera.com/video/live/"}
+];
+let channels=[...defaults],selected=null,hls=null;
+const $=id=>document.getElementById(id),video=$("video");
+function parseM3U(text){
+ const lines=text.split(/\r?\n/);let out=[],pending=null;
+ for(const raw of lines){const line=raw.trim();if(!line)continue;
+  if(line.startsWith("#EXTINF")){const comma=line.indexOf(",");const title=comma>=0?line.slice(comma+1).trim():"Unnamed channel";const group=(line.match(/group-title="([^"]*)"/)||[])[1]||"অন্যান্য";pending={name:title,group};}
+  else if(!line.startsWith("#")&&/^https?:\/\//i.test(line)){out.push({...pending||{name:"Channel",group:"অন্যান্য"},url:line});pending=null;}
+ }return out;
+}
+function render(){
+ const q=$("search").value.toLowerCase();const filtered=channels.filter(c=>(c.name+" "+c.group).toLowerCase().includes(q));
+ $("count").textContent="("+channels.length+")";$("list").innerHTML="";
+ if(!filtered.length){$("list").innerHTML='<div class="empty">কোনো চ্যানেল পাওয়া যায়নি</div>';return;}
+ filtered.forEach(c=>{const b=document.createElement("button");b.className="channel"+(selected===c?" active":"");b.innerHTML='<span class="dot"></span><span class="meta"><b></b><small></small></span>';b.querySelector("b").textContent=c.name;b.querySelector("small").textContent=c.group;b.onclick=()=>choose(c);$("list").appendChild(b);});
+}
+function stopPlayer(){if(hls){hls.destroy();hls=null;}video.pause();video.removeAttribute("src");video.load();video.hidden=true;$("placeholder").hidden=false;}
+function choose(c){
+ selected=c;render();$("nowTitle").textContent=c.name;$("nowInfo").textContent=c.group+" · "+c.url;$("openBtn").disabled=false;stopPlayer();
+ if(/\.m3u8?(\?|$)/i.test(c.url)){
+  $("placeholder").hidden=true;video.hidden=false;
+  if(video.canPlayType("application/vnd.apple.mpegurl")){video.src=c.url;video.play().catch(()=>{});}
+  else if(window.Hls&&Hls.isSupported()){hls=new Hls();hls.loadSource(c.url);hls.attachMedia(video);hls.on(Hls.Events.MANIFEST_PARSED,()=>video.play().catch(()=>{}));}
+  else{$("placeholder").hidden=false;video.hidden=true;$("placeholder").innerHTML="<b>এই ব্রাউজারে HLS চালানো যাচ্ছে না</b>অফিশিয়াল পেজটি নতুন ট্যাবে খুলুন।";}
+ }else{$("placeholder").innerHTML="<b>"+escapeHtml(c.name)+"</b>এটি একটি অফিসিয়াল ওয়াচ পেজ, সরাসরি ভিডিও স্ট্রিম নয়।<br>নিচের বাটনে চাপ দিয়ে পেজটি খুলুন।";}
+}
+function escapeHtml(s){return s.replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+$("openBtn").onclick=()=>{if(selected)window.open(selected.url,"_blank","noopener");};
+$("playlistFile").onchange=async e=>{const f=e.target.files[0];if(!f)return;try{const parsed=parseM3U(await f.text());if(!parsed.length){alert("এই ফাইলে কোনো বৈধ HTTP/HTTPS চ্যানেল URL পাওয়া যায়নি।");return;}channels=parsed;selected=null;stopPlayer();$("nowTitle").textContent="নতুন প্লেলিস্ট লোড হয়েছে";$("nowInfo").textContent=parsed.length+"টি চ্যানেল পাওয়া গেছে";$("openBtn").disabled=true;render();}catch(err){alert("ফাইলটি পড়া যায়নি।");}e.target.value="";};
+$("resetBtn").onclick=()=>{channels=[...defaults];selected=null;stopPlayer();$("nowTitle").textContent="কোনো চ্যানেল চালু নেই";$("nowInfo").textContent="ডিফল্ট তালিকা ফিরিয়ে আনা হয়েছে।";$("openBtn").disabled=true;render();};
+$("search").oninput=render;render();
+</script>
+</body>
+</html>
